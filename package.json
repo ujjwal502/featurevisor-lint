@@ -1,0 +1,48 @@
+{
+  "name": "featurevisor-lint",
+  "displayName": "Featurevisor Lint",
+  "description": "Schema validation for Featurevisor configuration files",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/*.yml"
+  ],
+  "main": "./out/extension.js",
+  "dependencies": {
+    "@featurevisor/core": "^1.31.0",
+    "yaml": "^2.0.0",
+    "zod": "^3.0.0"
+  },
+  "contributes": {
+    "configuration": {
+      "title": "Featurevisor Lint",
+      "properties": {
+        "featurevisorLint.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable Featurevisor validation"
+        },
+        "featurevisorLint.validateOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run validation on file save"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "featurevisor-lint.lint",
+        "title": "Validate Featurevisor Configuration"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/vscode": "^1.97.0"
+  }
+}
