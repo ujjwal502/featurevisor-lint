@@ -3,7 +3,7 @@ import * as path from "path";
 import { ProjectConfig } from "@featurevisor/core";
 
 export class FeaturevisorProjectService {
-  private config: ProjectConfig;
+  private config!: ProjectConfig;
   private attributeKeys: string[] = [];
   private segmentKeys: string[] = [];
   private featureKeys: string[] = [];
@@ -21,8 +21,10 @@ export class FeaturevisorProjectService {
     await this.scanDirectory("features");
   }
 
-  private async scanDirectory(type: string) {
-    const dirPath = path.join(this.config[`${type}DirectoryPath`]);
+  private async scanDirectory(type: "attributes" | "segments" | "features") {
+    const dirPath = path.join(
+      this.config[`${type}DirectoryPath` as keyof ProjectConfig]
+    );
     const files = await vscode.workspace.findFiles(
       new vscode.RelativePattern(dirPath, "**/*.yml")
     );
